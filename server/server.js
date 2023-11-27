@@ -10,7 +10,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 // Middleware
-app.use(bodyParserMiddleware)
+app.use(express.json())
 
 // Connect to MongoDB
 mongoose.connect(mongo_URI)
@@ -23,6 +23,10 @@ mongoose.connect(mongo_URI)
 
 // Routes
 app.use('/api/users', userRoutes)
+
+app.get('/api/users', (req, res) => {
+  res.json({message: "hello"})
+})
 
 // Start the server
 app.listen(PORT, (error) => {
