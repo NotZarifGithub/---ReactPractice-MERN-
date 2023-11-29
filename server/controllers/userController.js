@@ -1,7 +1,7 @@
 const User = require('../models/userModel.js')
 
 // Get all users
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res, next) => {
   try {
     const user = await User.find()
 
@@ -11,13 +11,13 @@ const getAllUsers = async (req, res) => {
     })
 
   } catch (error) {
-    console.error(error)
+    next(error)
     
   }
 }
 
 // Get user by Id
-const getUser = async (req, res) => {
+const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)
 
@@ -25,15 +25,15 @@ const getUser = async (req, res) => {
       res.status(404).json({message: "User does not exist!"})
     }
     
-    res.status(200).json({message: "Successfully found user!"})
+    res.status(200).json({message: "Successfully found user!", user})
 
   } catch (error) {
-    console.error(error)
+    next(error)
   }
 }
 
 // Get user by email
-const getUserByEmail = async (req, res) => {
+const getUserByEmail = async (req, res, next) => {
   try {
     const user = await User.findOne(req.body.email)
 
@@ -44,12 +44,12 @@ const getUserByEmail = async (req, res) => {
     res.status(200).json({message: "User found successfully!", user})
     
   } catch (error) {
-    console.error(error)
+    next(error)
   }
 }
 
 // Create user
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
 
     const { name, email, password} = req.body
@@ -65,13 +65,13 @@ const createUser = async (req, res) => {
     })
 
   } catch (error) {
-    console.error(error)
+    next(error)
 
   }
 }
 
 // Update user by id
-const updateUserById = async (req, res) => {
+const updateUserById = async (req, res, next) => {
   try {
 
     const userId = req.params.id
@@ -89,12 +89,12 @@ const updateUserById = async (req, res) => {
     res.status(200).json({message: "User updated successfully!", updatedUser})
 
   } catch (error) {
-    console.error(error)
+    next(error)
   }
 }
 
 // Delete user by id
-const deleteUserById = async (req, res) => {
+const deleteUserById = async (req, res, next) => {
   try {
 
     const user = req.params.id
@@ -106,7 +106,7 @@ const deleteUserById = async (req, res) => {
     res.status(200).json({message: "User deleted successfully"})
 
   } catch (error) {
-    console.error(error)
+    next(error)
   }
 }
 
