@@ -1,11 +1,11 @@
 import SignCard from "../components/ui/SignCard"
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <main>
-      <SignCard signIn={true}/>
+      <SignCard signIn={false}/>
     </main>
   )
 }
 
-export default SignIn
+export default SignUp 

@@ -9,14 +9,16 @@ const Navbar = () => {
         
         {/* logo */}
         <motion.button
-          className="text-3xl"
+          className="text-2xl"
         >
-          InspiroVerse
+          <Link to={'/'}>
+            InspiroVerse
+          </Link>
         </motion.button>
 
         {/* hamburger button */}
         <motion.button
-          className="text-3xl md:hidden"
+          className="text-2xl md:hidden"
           whileHover={{
             rotate: 90,
             transition: {
@@ -34,12 +36,12 @@ const Navbar = () => {
 
           {/* sign in */}
           <motion.button 
-            className="text-2xl"
+            className="text-xl"
             whileHover={{scale: 1.1}}
             whileTap={{scale: 0.9}}
           >
             <Link 
-              to={'/sign-in'}
+              to={'/login'}
             >
               Sign In
             </Link>

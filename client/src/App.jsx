@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from "./components/common/Navbar.jsx"
 import Home from './pages/Home.jsx'
+import SignUp from './pages/SignUp.jsx'
 import SignIn from './pages/SignIn.jsx'
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/sign-in' element={<SignIn />}/>
+        <Route path='/register' element={<SignUp />}/>
+        <Route path='/login' element={<SignIn />}/>
       </Routes>
     </BrowserRouter>
   )

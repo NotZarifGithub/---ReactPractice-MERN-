@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { mongo_URI } = require('./config/dev.js')
 const bodyParserMiddleware = require('./middleware/bodyParserMiddleware.js')
-const userRoutes = require('./routes/userRoutes.js')
+const authRoutes = require('./routes/authRoutes.js')
 const errorHandler = require('./middleware/errorHandlerMiddleware.js')
 require('dotenv').config()
 
@@ -24,11 +24,7 @@ mongoose.connect(mongo_URI)
   })
 
 // Routes
-app.use('/api/users', userRoutes)
-
-app.get('/api/users', (req, res) => {
-  res.json({message: "hello"})
-})
+app.use('/api/auth', authRoutes)
 
 // Start the server
 app.listen(PORT, (error) => {

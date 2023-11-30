@@ -1,72 +1,66 @@
 const User = require('../models/userModel.js')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
-// Get all users
-const getAllUsers = async (req, res, next) => {
+// register user
+const registerUser = async (req, res, next) => {
   try {
-    const user = await User.find()
 
-    res.status(200).json({
-      message: "Successfully getting all users!", 
-      user
-    })
+    const { username, email, password} = req.body
 
-  } catch (error) {
-    next(error)
+    // check if user exist
+    const userExist = await User.findOne({email})
     
-  }
-}
+    if (userExist) {
+      res.status(401).json({
+        message: "User already exist!"
+      })
+    } 
 
-// Get user by Id
-const getUser = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.id)
+    const hashedPassword = await bcrypt.hash(password, 10)
 
-    if (!user) {
-      res.status(404).json({message: "User does not exist!"})
-    }
-    
-    res.status(200).json({message: "Successfully found user!", user})
-
-  } catch (error) {
-    next(error)
-  }
-}
-
-// Get user by email
-const getUserByEmail = async (req, res, next) => {
-  try {
-    const user = await User.findOne(req.body.email)
-
-    if (!user) {
-      res.status(404).json({message: "User does not exist!"})
-    }
-
-    res.status(200).json({message: "User found successfully!", user})
-    
-  } catch (error) {
-    next(error)
-  }
-}
-
-// Create user
-const createUser = async (req, res, next) => {
-  try {
-
-    const { name, email, password} = req.body
     const user = await User.create({
-      name, 
+      username, 
       email, 
-      password 
+      password: hashedPassword 
     })
-    
+
     res.status(200).json({ 
-      message: "User successfully created!",
+      message: "User successfully registered!",
       user 
     })
 
   } catch (error) {
     next(error)
+  }
+}
 
+// login user
+const loginUser = async (req, res, next) => {
+  try {
+    const {email, password} = req.body
+    
+    const user = await User.findOne({email})
+
+    if (!user) {
+      res.status(401).json({message: "User not found"})
+    }
+
+    // verify password
+    const validPassword = bcrypt.compare(password, user.password)
+
+    if (!validPassword) {
+      res.status(401).json({message: "Invalid Password"})
+    }
+    
+    const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: '30d'})
+    res.cookie("access_token", token, { httpOnly: true }).status(200).json({ 
+      message: "User successfully logged in!",
+      user 
+    })
+
+  } catch (error) {
+    next(error)
   }
 }
 
@@ -111,10 +105,8 @@ const deleteUserById = async (req, res, next) => {
 }
 
 module.exports = {
-  getAllUsers,
-  getUser,
-  getUserByEmail,
-  createUser,
+  registerUser,
+  loginUser,
   updateUserById,
   deleteUserById
 };
