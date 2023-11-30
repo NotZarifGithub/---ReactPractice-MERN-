@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const { mongo_URI } = require('./config/dev.js')
 const bodyParserMiddleware = require('./middleware/bodyParserMiddleware.js')
 const userRoutes = require('./routes/userRoutes.js')
+const errorHandler = require('./middleware/errorHandlerMiddleware.js')
 require('dotenv').config()
 
 // Initialize express
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 3000
 
 // Middleware
 app.use(express.json())
+app.use(errorHandler)
 
 // Connect to MongoDB
 mongoose.connect(mongo_URI)
