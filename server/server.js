@@ -1,7 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const { mongo_URI } = require('./config/dev.js')
-const bodyParserMiddleware = require('./middleware/bodyParserMiddleware.js')
 const authRoutes = require('./routes/authRoutes.js')
 const errorHandler = require('./middleware/errorHandlerMiddleware.js')
 require('dotenv').config()

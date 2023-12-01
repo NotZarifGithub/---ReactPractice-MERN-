@@ -1,6 +1,7 @@
 const User = require('../models/userModel.js')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const passport = require('passport')
 
 // register user
 const registerUser = async (req, res, next) => {
@@ -73,7 +74,7 @@ const updateUserById = async (req, res, next) => {
 
     const {name, email, password} = req.body
     const updatedData = {
-      name,
+      username,
       email,
       password
     }
@@ -108,5 +109,5 @@ module.exports = {
   registerUser,
   loginUser,
   updateUserById,
-  deleteUserById
+  deleteUserById,
 };
