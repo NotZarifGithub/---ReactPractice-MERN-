@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const { mongo_URI } = require('./config/dev.js')
 const authRoutes = require('./routes/authRoutes.js')
 const errorHandler = require('./middleware/errorHandlerMiddleware.js')
+const quoteRoutes = require('./routes/quoteRoutes.js')
+const emailRoutes = require('./routes/emailRoutes.js')
 require('dotenv').config()
 
 // Initialize express
@@ -24,6 +26,8 @@ mongoose.connect(mongo_URI)
 
 // Routes
 app.use('/api/auth', authRoutes)
+app.use('/api/quote', quoteRoutes)
+app.use('/api/email', emailRoutes)
 
 // Start the server
 app.listen(PORT, (error) => {
