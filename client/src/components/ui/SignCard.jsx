@@ -69,7 +69,7 @@ const SignCard = ({signIn}) => {
           <div>
             <form 
               action=""
-              className="flex flex-col gap-2 w-full"
+              className="flex flex-col w-full gap-2"
             >
 
               {/* Username */}
@@ -158,7 +158,7 @@ const SignCard = ({signIn}) => {
             </form>
           </div>
 
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             or
           </div>
 
@@ -173,7 +173,7 @@ const SignCard = ({signIn}) => {
 
         {/* forgot password */}
         <div>
-          <button className="capitalize text-xs underline text-white/80">
+          <button className="text-xs underline capitalize text-white/80">
             forgot password?
           </button>
         </div>

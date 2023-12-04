@@ -3,8 +3,8 @@ const router = express.Router()
 const quoteController = require('../controllers/quoteController')
 
 router.get('/get-all-quotes', quoteController.getAllQuotes)
-router.get('/get-all-quotes-by-name/:name', quoteController.getAllQuotesByName)
 router.post('/create-quote', quoteController.createQuote)
+router.get('/get-quote', quoteController.getQuote)
 
 module.exports = router
 

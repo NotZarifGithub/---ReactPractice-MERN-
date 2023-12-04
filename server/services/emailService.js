@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer')
 const Quote = require('../models/quoteModel')
 const cron = require('node-cron')
+const { getQuote } = require('../controllers/quoteController')
+const config = require('../config/email')
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -10,32 +12,23 @@ const transporter = nodemailer.createTransport({
   }
 })
 
-const getRandomQuote = async () => {
+const sendMotivationalEmailNow = async (req, res) => {
+
+  const {emailInput} = req.body
+
   try {
-
-    const count = await Quote.countDocuments()
-    const randomIndex = Math.floor(Math.random() * count)
-    const randomQuote = await Quote.findOne().skip(randomIndex)
-    return randomQuote[0]; 
-
-    return randomQuote
-  } catch (error) {
-    console.error('Error fetching random quote:', error)
-  }
-}
-
-const sendMotivationalEmail = async () => {
-  try {
-    const quote = getRandomQuote()
+    console.log("Received email:", emailInput);
+    const quote = await getQuote()
+    console.log(quote)
     if(!quote) {
       console.log("No quotes found in the database")
     }
     
     const mailOptions = {
       from: "flacko.programming@gmail.com",
-      to: "ronaldo7zarif@gmail.com",
+      to: emailInput,
       subject: "Motivational Quote of The Day",
-      text: `Here's your daily motivational quote:\n\n${quote.quote} - ${quote.name}`
+      text: `Here's your daily motivational quote:\n\n${quote[0].quote} - ${quote[0].author}`
     }
 
     const info = await transporter.sendMail(mailOptions)
@@ -46,6 +39,54 @@ const sendMotivationalEmail = async () => {
   }
 }
 
+const storeUserEmail = async (req, res) => {
+  try {
+    const {emailInput} = req.body
+    config.userEmail = emailInput
+
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const sendMotivationalEmailEveryday = async (req, res) => {
+
+  const {emailInput} = req.body
+
+  try {
+    console.log("Received email:", emailInput);
+    const quote = await getQuote()
+    console.log(quote)
+    if(!quote) {
+      console.log("No quotes found in the database")
+    }
+    
+    const mailOptions = {
+      from: "flacko.programming@gmail.com",
+      to: emailInput,
+      subject: "Motivational Quote of The Day",
+      text: `Here's your daily motivational quote:\n\n${quote[0].quote} - ${quote[0].author}`
+    }
+
+    const info = await transporter.sendMail(mailOptions)
+    console.log(info)
+    return emailInput
+
+  } catch (error) {
+    console.error(error)     
+  }
+}
+
+cron.schedule("0 8 * * *", async () => {
+  try {
+    await sendMotivationalEmailEveryday()
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 module.exports = {
-  sendMotivationalEmail
+  sendMotivationalEmailNow,
+  sendMotivationalEmailEveryday,
+  storeUserEmail
 }

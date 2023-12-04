@@ -1,4 +1,4 @@
-import { IoEllipsisHorizontalOutline } from "react-icons/io5";
+
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom";
 
@@ -16,8 +16,8 @@ const Navbar = () => {
           </Link>
         </motion.button>
 
-        {/* hamburger button */}
-        <motion.button
+
+        {/* <motion.button
           className="text-2xl md:hidden"
           whileHover={{
             rotate: 90,
@@ -29,12 +29,9 @@ const Navbar = () => {
           while
         >
           <IoEllipsisHorizontalOutline />
-        </motion.button>
+        </motion.button> */}
 
-        {/* navlinks */}
-        <div className="hidden md:flex">
-
-          {/* sign in */}
+        {/* <div className="hidden md:flex">
           <motion.button 
             className="text-xl"
             whileHover={{scale: 1.1}}
@@ -46,7 +43,7 @@ const Navbar = () => {
               Sign In
             </Link>
           </motion.button>
-        </div>
+        </div> */}
       </section>
     </header>
   )
