@@ -51,7 +51,6 @@ const Home = () => {
       ...formData,
       [e.target.id]: e.target.value
     })
-    console.log(formData)
   }
   
   const handleSubmitTryItOut = async () => {
