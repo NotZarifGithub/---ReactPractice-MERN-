@@ -12,18 +12,8 @@ require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT || 3000
 
-const corsOptions = {
-  origin: 'https://inspiroverse.vercel.app/',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // enable set cookie
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsOptions));
-
-
 // Middleware
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
 app.use(errorHandler)
 

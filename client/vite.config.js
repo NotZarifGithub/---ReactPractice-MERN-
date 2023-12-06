@@ -6,8 +6,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://inspiroverse.onrender.com/',
-        secure: false,
+        target: 'https://inspiroverse.onrender.com',
+        secure: true,
       },
     },
   },
