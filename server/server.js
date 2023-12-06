@@ -13,7 +13,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 const corsOptions = {
-  origin: 'http://yourfrontend.com',
+  origin: 'https://inspiroverse.vercel.app/',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // enable set cookie
   optionsSuccessStatus: 204,
