@@ -43,7 +43,13 @@ const Home = () => {
 
   // Render loading state while fetching quotes
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        className="max-w-[1200px] mx-auto flex justify-center items-center h-[calc(100vh-112px)]"
+        >
+          Loading...
+      </div>
+    )
   }
 
   const handleChange= (e) => {

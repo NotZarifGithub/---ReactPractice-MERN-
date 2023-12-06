@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
 const Email = require('../models/emailModel')
 const cron = require('node-cron')
-const { getQuote } = require('../controllers/quoteController')
+const { getQuote } = require('./quoteController')
 
 const transporter = nodemailer.createTransport({
   service: "gmail",

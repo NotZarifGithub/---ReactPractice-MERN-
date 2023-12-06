@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes.js')
 const errorHandler = require('./middleware/errorHandlerMiddleware.js')
 const quoteRoutes = require('./routes/quoteRoutes.js')
 const emailRoutes = require('./routes/emailRoutes.js')
+const cors = require('cors')
 require('dotenv').config()
 
 // Initialize express
@@ -12,6 +13,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 // Middleware
+app.use(cors())
 app.use(express.json())
 app.use(errorHandler)
 
