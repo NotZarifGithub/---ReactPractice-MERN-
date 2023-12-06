@@ -8,8 +8,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://inspiroverse.onrender.com',
-        changeOrigin: true, // This line is added
-        secure: false, // Change this to false
+        secure: true, 
       },
     },
   },
