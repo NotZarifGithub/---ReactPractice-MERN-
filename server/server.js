@@ -12,8 +12,18 @@ require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT || 3000
 
+const corsOptions = {
+  origin: 'http://yourfrontend.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // enable set cookie
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+
 // Middleware
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(errorHandler)
 
