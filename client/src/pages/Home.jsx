@@ -91,7 +91,7 @@ const Home = () => {
               Elevate Your Everyday Journey with Daily Doses of Inspiration Delivered to Your Inbox
             </h1>
             <p>
-              Welcome to EpicMotivator, where inspiration meets your inbox every day. In a world filled with challenges, victories, and endless possibilities, we understand the importance of having a constant source of motivation. That&aposs why we present EpicMotivator—a SaaS designed to elevate your everyday journey.
+              Welcome to EpicMotivator, where inspiration meets your inbox every day. In a world filled with challenges, victories, and endless possibilities, we understand the importance of having a constant source of motivation. That's why we present EpicMotivator—a SaaS designed to elevate your everyday journey.
             </p>
           </div>
           <div className="flex gap-2">
@@ -179,7 +179,7 @@ const Home = () => {
             className='flex flex-col items-center justify-center gap-4 text-center'
           >
             <h1 className='italic font-semibold md:text-xl'>
-            &apos{getQuote[currentQuoteIndex].quote}&apos
+            "{getQuote[currentQuoteIndex].quote}"
             </h1>
             <p>
               {getQuote[currentQuoteIndex].name}
