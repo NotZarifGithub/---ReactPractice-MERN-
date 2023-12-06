@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const allQuotes = await axios.get('/api/quote/get-all-quotes');
+        const allQuotes = await axios.get('https://inspiroverse.onrender.com/api/quote/get-all-quotes');
         setGetQuote(allQuotes.data);
         setLoading(false);
       } catch (error) {
@@ -61,7 +61,7 @@ const Home = () => {
   
   const handleSubmitTryItOut = async () => {
     try {
-      await axios.post('/api/email/sendMotivationalEmailNow', {emailInput: formData.email});
+      await axios.post('https://inspiroverse.onrender.com/api/email/sendMotivationalEmailNow', {emailInput: formData.email});
       console.log("Successfully sent email");
       setIsGetStartedClick(!isGetStartedClick);
     } catch (error) {
@@ -71,7 +71,7 @@ const Home = () => {
   
   const handleSubmitGetStarted = async () => {
     try {
-      await axios.post('/api/email/storeUserEmail', {emailInput: formData.email});
+      await axios.post('https://inspiroverse.onrender.com/api/email/storeUserEmail', {emailInput: formData.email});
       console.log("Successfully sent email");
       setIsGetStartedClick(!isGetStartedClick);
     } catch (error) {
