@@ -12,8 +12,17 @@ require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT || 3000
 
+// Update corsOptions to allow all origins during development
+const corsOptions = {
+  origin: '*', // Allow all origins during development
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+
 // Middleware
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(errorHandler)
 
